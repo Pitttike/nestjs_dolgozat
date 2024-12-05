@@ -1,0 +1,648 @@
+{
+    "info": {
+        "_postman_id": "57de8cb2-7385-40db-905e-48a62e63bf01",
+        "name": "Mikulas - Toy Management API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "580323"
+    },
+    "item": [
+        {
+            "name": "Toys",
+            "item": [
+                {
+                    "name": "Get Toys",
+                    "item": [
+                        {
+                            "name": "Get All Toys",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "*/*",
+                                        "type": "default"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Get One Toy",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "2"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Get One Toy (Wrong ID)",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/1234",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "1234"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Get One Toy (Invalid ID Format)",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/abc",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "abc"]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Toys",
+                    "item": [
+                        {
+                            "name": "Add New Toy",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Toy train\",\n    \"material\": \"wood\",\n    \"weight\": 1.25\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add New Toy (Invalid Types)",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": 78,\n    \"material\": \"air\",\n    \"weight\": -5\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add New Toy (Missing Required Fields)",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"material\": \"plastic\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add New Toy (Invalid JSON)",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Broken toy\",\n    \"material\": \"wood\",\n    \"weight\": 1.5,"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys"]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Toys",
+                    "item": [
+                        {
+                            "name": "Update Toy",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"weight\": 3\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "2"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Toy (Invalid Types)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"material\": false\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "2"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Toy (Wrong ID)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"PlayCube X\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/1234",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "1234"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Toy (Invalid ID Format)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"PlayCube X\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/abc",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "abc"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Toy (Invalid JSON)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Broken update\","
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "2"]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Toys",
+                    "item": [
+                        {
+                            "name": "Delete One Toy",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "2"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Delete One Toy (Wrong ID)",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/1234",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "1234"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Delete One Toy (Invalid ID Format)",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/toys/abc",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["toys", "abc"]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Children",
+            "item": [
+                {
+                    "name": "Get Children",
+                    "item": [
+                        {
+                            "name": "Get All Children",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Get One Child",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Get One Child (Wrong ID)",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/1234",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "1234"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Get One Child (Invalid ID Format)",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/abc",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "abc"]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Create Children",
+                    "item": [
+                        {
+                            "name": "Add New Child",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"John Doe\",\n    \"age\": 8,\n    \"address\": \"123 Main St\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add New Child (Invalid Types)",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": 123,\n    \"age\": \"eight\",\n    \"address\": true\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add New Child (Missing Required Fields)",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"address\": \"123 Main St\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add New Child (Invalid JSON)",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"John Doe\",\n    \"age\": 8,"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children"]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Children",
+                    "item": [
+                        {
+                            "name": "Update Child",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"age\": 9,\n    \"address\": \"456 Oak Avenue\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Child (Invalid Types)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"age\": \"nine\",\n    \"address\": 123\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Child (Wrong ID)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Jane Doe\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/1234",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "1234"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Child (Invalid ID Format)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Jane Doe\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/abc",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "abc"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update Child (Invalid JSON)",
+                            "request": {
+                                "method": "PATCH",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"name\": \"Jane Doe\","
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2"]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Child Toys Management",
+                    "item": [
+                        {
+                            "name": "Add Toy to Child",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2/toys/1",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2", "toys", "1"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add Toy to Child (Wrong Child ID)",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/1234/toys/1",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "1234", "toys", "1"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Add Toy to Child (Wrong Toy ID)",
+                            "request": {
+                                "method": "PUT",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2/toys/1234",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2", "toys", "1234"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Remove Toy from Child",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2/toys/1",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2", "toys", "1"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Remove Toy from Child (Wrong Child ID)",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/1234/toys/1",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "1234", "toys", "1"]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Remove Toy from Child (Wrong Toy ID)",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/children/2/toys/1234",
+                                    "host": ["{{baseUrl}}"],
+                                    "path": ["children", "2", "toys", "1234"]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
