@@ -7,7 +7,7 @@ async function main() {
         const gyerek = await prisma.child.create({
             data: {
                 name: faker.person.fullName(),
-                address: faker.location.streetAddress(),
+                address: `${faker.location.streetAddress()}, ${faker.location.city()}, ${faker.location.country()}`,
                 isGood: faker.datatype.boolean(),
             },
         });

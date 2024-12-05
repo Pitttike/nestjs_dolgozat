@@ -3,7 +3,6 @@ import { CreateJatekokDto } from './dto/create-jatekok.dto';
 import { UpdateJatekokDto } from './dto/update-jatekok.dto';
 import { PrismaService } from 'src/prisma.service';
 import { NotFoundException } from '@nestjs/common';
-import { Material } from '@prisma/client';
 
 @Injectable()
 export class JatekokService {
@@ -19,18 +18,6 @@ export class JatekokService {
 
   findAll() {
     return this.prisma.toy.findMany();
-  }
-
-  async findToysByMaterial(material: string) {
-    return this.prisma.toy.findMany({
-      where: { material: material as Material },
-    });
-  }
-
-  async findToysByWeightRange(minWeight: number, maxWeight: number) {
-    return this.prisma.toy.findMany({
-      where: { weight: { gte: minWeight, lte: maxWeight } },
-    });
   }
 
   async findOne(id: number) {

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateGyerekekDto } from './dto/create-gyerekek.dto';
 import { UpdateGyerekekDto } from './dto/update-gyerekek.dto';
 import { PrismaService } from 'src/prisma.service';
-import { NotFoundException, BadRequestException } from '@nestjs/common';
+import { NotFoundException} from '@nestjs/common';
 
 @Injectable()
 export class GyerekekService {
@@ -16,22 +16,6 @@ export class GyerekekService {
 
   findAll() {
     return this.prisma.child.findMany();
-  }
-
-  findChildrenByBehavior(behavior: string) {
-    if (behavior === 'good') {
-      return this.prisma.child.findMany({
-        where: { isGood: true },
-      });
-    }
-    else if (behavior === 'bad') {
-      return this.prisma.child.findMany({
-        where: { isGood: false },
-      });
-    }
-    else {
-      throw new BadRequestException('Invalid behavior');
-    }
   }
 
   async findOne(id: number) {
@@ -70,15 +54,27 @@ export class GyerekekService {
   }
 
   async addToy(id: number, toyId: number) {
+
+    const child = await this.prisma.child.findUnique({
+      where: { id },
+    });
+    if (!child) {
+      throw new NotFoundException(`Child with ID ${id} not found`);
+    }
+
+    const toy = await this.prisma.toy.findUnique({
+      where: { id: toyId },
+    });
+    if (!toy) {
+      throw new NotFoundException(`Toy with ID ${toyId} not found`);
+    }
+
     try {
       return await this.prisma.child.update({
         where: { id },
         data: { toys: { connect: { id: toyId } } },
       });
     } catch (error) {
-      if (error.code === 'P2025') {
-        throw new NotFoundException(`Child with ID ${id} not found`);
-      }
       throw error;
     }
   }
@@ -97,15 +93,27 @@ export class GyerekekService {
   }
 
   async removeToy(id: number, toyId: number) {
+
+    const child = await this.prisma.child.findUnique({
+      where: { id },
+    });
+    if (!child) {
+      throw new NotFoundException(`Child with ID ${id} not found`);
+    }
+
+    const toy = await this.prisma.toy.findUnique({
+      where: { id: toyId },
+    });
+    if (!toy) {
+      throw new NotFoundException(`Toy with ID ${toyId} not found`);
+    }
+
     try {
       return await this.prisma.child.update({
         where: { id },
-      data: { toys: { disconnect: { id: toyId } } },
+        data: { toys: { disconnect: { id: toyId } } },
       });
     } catch (error) {
-      if (error.code === 'P2025') {
-        throw new NotFoundException(`Child with ID ${id}not found`);
-      }
       throw error;
     }
   }

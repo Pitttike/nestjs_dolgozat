@@ -1,5 +1,5 @@
 import { Material } from '@prisma/client';
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
 export class CreateJatekokDto {
     @IsString()
     @IsNotEmpty()
@@ -7,6 +7,8 @@ export class CreateJatekokDto {
     @IsEnum(Material)
     material: Material;
     @IsNumber()
+    @IsNotEmpty()
+    @IsPositive()
     weight: number;
     childId: number | null;
 }

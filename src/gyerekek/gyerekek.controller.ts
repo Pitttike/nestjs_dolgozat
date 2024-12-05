@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query, BadRequestException } from '@nestjs/common';
 import { GyerekekService } from './gyerekek.service';
 import { CreateGyerekekDto } from './dto/create-gyerekek.dto';
 import { UpdateGyerekekDto } from './dto/update-gyerekek.dto';
-import { CreateJatekokDto } from 'src/jatekok/dto/create-jatekok.dto';
+
 @Controller('children')
 export class GyerekekController {
   constructor(private readonly gyerekekService: GyerekekService) {}
@@ -17,14 +17,15 @@ export class GyerekekController {
     return this.gyerekekService.findAll();
   }
 
-  @Get('byBehavior')
-  findChildrenByBehavior(@Query('behavior') behavior: string) {
-    return this.gyerekekService.findChildrenByBehavior(behavior);
-  }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.gyerekekService.findOne(+id);
+    const childId = +id;
+    if (isNaN(childId)) {
+      throw new BadRequestException('Invalid ID format');
+    }
+    return this.gyerekekService.findOne(childId);
   }
 
   @Get(':id/toys')
@@ -34,21 +35,37 @@ export class GyerekekController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateGyerekekDto: UpdateGyerekekDto) {
-    return this.gyerekekService.update(+id, updateGyerekekDto);
+    const childId = +id;
+    if (isNaN(childId)) {
+      throw new BadRequestException('Invalid ID format');
+    }
+    return this.gyerekekService.update(childId, updateGyerekekDto);
   }
 
   @Put(':id/toys/:toyId')
   addToy(@Param('id') id: string, @Param('toyId') toyId: string) {
-    return this.gyerekekService.addToy(+id, +toyId);
+    const childId = +id;
+    if (isNaN(childId)) {
+      throw new BadRequestException('Invalid ID format');
+    }
+    return this.gyerekekService.addToy(childId, +toyId);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.gyerekekService.remove(+id);
+    const childId = +id;
+    if (isNaN(childId)) {
+      throw new BadRequestException('Invalid ID format');
+    }
+    return this.gyerekekService.remove(childId);
   }
 
   @Delete(':id/toys/:toyId')
   removeToy(@Param('id') id: string, @Param('toyId') toyId: string) {
-    return this.gyerekekService.removeToy(+id, +toyId);
+    const childId = +id;
+    if (isNaN(childId)) {
+      throw new BadRequestException('Invalid ID format');
+    }
+    return this.gyerekekService.removeToy(childId, +toyId);
   }
 }
