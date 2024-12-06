@@ -1,7 +1,7 @@
 {
     "info": {
         "_postman_id": "57de8cb2-7385-40db-905e-48a62e63bf01",
-        "name": "Mikulas - Toy Management API",
+        "name": "Mikulas",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "_exporter_id": "580323"
     },
@@ -470,7 +470,7 @@
                                 ],
                                 "body": {
                                     "mode": "raw",
-                                    "raw": "{\n    \"age\": 9,\n    \"address\": \"456 Oak Avenue\"\n}"
+                                    "raw": "{\n    \"address\": \"456 Oak Avenue\"\n}"
                                 },
                                 "url": {
                                     "raw": "{{baseUrl}}/children/2",
